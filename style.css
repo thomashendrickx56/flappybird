@@ -1,0 +1,150 @@
+body {
+    /* Utilise toute la hauteur et la largeur de la fenêtre */
+    width: 100vw;
+    height: 100vh;
+    
+    /* Centre le conteneur de jeu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin: 0;
+    background-color: #38c7ef;
+    font-family: Arial, sans-serif;
+}
+
+#game-container {
+    /* Dimensions standard Flappy Bird (utilisées comme ratio de base) */
+    width: 288px; 
+    height: 512px; 
+    
+    /* === NOUVEAU : Mise à l'échelle pour remplir l'écran === */
+    /* Utilise la fonction CSS min pour trouver le facteur de zoom maximum possible */
+    /* Le facteur est basé sur le rapport Hauteur/512 ou Largeur/288 */
+    transform: scale(min(calc(100vh / 512), calc(100vw / 288)));
+    
+    /* IMPORTANT : Fixe le point d'origine de la transformation au centre */
+    transform-origin: center center;
+    /* ======================================================== */
+    
+    /* Utilisation de l'asset de fond */
+    background: url('assets/background-day.png') repeat-y; 
+    
+    overflow: hidden; 
+    position: relative; 
+    cursor: pointer;
+}
+
+/* ... (Le reste du fichier style.css reste inchangé) ... */
+
+#bird {
+    width: 34px; 
+    height: 24px;
+    
+    /* Utilisation de l'asset Blue Bird */
+    background-image: url('assets/bluebird-midflap.png'); 
+    background-size: cover;
+    
+    position: absolute;
+    top: 250px; 
+    left: 50px;
+    z-index: 10;
+    transition: transform 0.1s linear; 
+}
+
+#base {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 112px; /* Hauteur de l'asset base.png */
+    /* Utilisation de l'asset du sol */
+    background-image: url('assets/base.png');
+    background-repeat: repeat-x;
+    z-index: 20;
+}
+
+.pipe {
+    width: 52px; /* Largeur de l'asset pipe.png */
+    
+    /* Utilisation de l'asset Pipe Red */
+    background-image: url('assets/pipe-red.png');
+    background-repeat: repeat-y;
+    border: none; 
+    
+    position: absolute;
+    right: -52px; 
+}
+
+.pipe-top {
+    /* Le tuyau du haut est tourné et sa hauteur est ajustée */
+    transform: rotate(180deg);
+}
+
+#score {
+    position: absolute;
+    top: 5%; /* Position en haut */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 38px; /* Grand score */
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px #000;
+    z-index: 40; 
+}
+
+/* --- STYLE DES MENUS (ACCUEIL & GAME OVER) --- */
+#message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background-color: rgba(0, 0, 0, 0.4); /* Assombrissement léger */
+    z-index: 50; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+/* Style spécifique pour l'image Game Over */
+.game-over-img {
+    width: 90%; /* Prend 90% de la largeur du conteneur de jeu */
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+.game-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px #000;
+}
+
+.instructions, .final-score {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+}
+
+.restart-button {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f7d14d; /* Jaune/Or pour le bouton */
+    color: #333;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px #c2a138; /* Ombre de bouton 3D */
+    transition: background-color 0.1s;
+}
+
+.restart-button:active {
+    box-shadow: 0 2px #c2a138;
+    transform: translateY(2px);
+}
